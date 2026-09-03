@@ -9,10 +9,13 @@ let current = 0;
 let typing = false;
 let fullText = "";
 let typingTimer = null;
+
 let normalToggle = false;
 
 
-
+/* =====================================================
+   صور زهرة
+   ===================================================== */
 
 const images = {
     normal: "normal_zahra.png",
@@ -23,19 +26,22 @@ const images = {
 };
 
 
-
+/* =====================================================
+   تغيير صورة زهرة
+   ===================================================== */
 
 function setCharacter(expression) {
 
-    if (!images[expression]) {
-        return;
+    if (images[expression]) {
+        character.src = images[expression];
     }
-
-    character.src = "images/" + images[expression];
 }
 
 
-
+/* =====================================================
+   تبديل التعبير الطبيعي
+   Normal ↔ Another Normal
+   ===================================================== */
 
 function normalExpression() {
 
@@ -49,7 +55,9 @@ function normalExpression() {
 }
 
 
-
+/* =====================================================
+   القصة
+   ===================================================== */
 
 const story = [
 
@@ -73,16 +81,19 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما اسمها؟",
+
         choices: [
             {
                 text: "نور",
                 response: "صح عليك! إذن أنت فضولية وذكية.",
                 expression: "normal"
             },
+
             {
                 text: "ضوء",
-                response: "أحول الفكر! تحتاج لارتداء نظارات لعقلك. اسم نور أوسع من الضوء، ألا تستطيع التفكير!",
+                response: "أحول الفكر! تحتاج لإرتداء نظارات لعقلك. اسم نور أوسع من الضوء، ألا تستطيع التفكير!",
                 expression: "angry"
             }
         ]
@@ -96,13 +107,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما اسم نور الثاني؟",
+
         choices: [
             {
                 text: "محمد",
                 response: "أووووه يبدو حقا أنك تعرف ما تختار، مبارك عليك.",
                 expression: "normal"
             },
+
             {
                 text: "أحمد",
                 response: "بدأت بالاقتناع بفكرة نظارات لأحول الفكر والتفكير.",
@@ -119,13 +133,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما لون نور المفضل؟",
+
         choices: [
             {
                 text: "الأسود",
                 response: "بعيد جدا.",
                 expression: "disappointed"
             },
+
             {
                 text: "الأصفر",
                 response: "صح عليك!",
@@ -142,18 +159,22 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما أكثر شيء تعاني منه؟",
+
         choices: [
             {
                 text: "السعي للمثالية",
                 response: "بعيد تماما.",
                 expression: "disappointed"
             },
+
             {
                 text: "التشتت",
                 response: "هي كذلك، وأكبر دليل كونك تلعب هذا الشيء.",
                 expression: "normal"
             },
+
             {
                 text: "التسويف",
                 response: "أحم صحيح نوعا ما ولكن ليس الإجابة الأصح.",
@@ -161,6 +182,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       الخطاب
+       ===================================================== */
 
     {
         type: "text",
@@ -200,20 +226,28 @@ const story = [
 
     {
         type: "choice",
-        question: "هل اكتشفت ذلك الجزء العظيم فيك؟",
+
+        question: "هل قد اكتشفت ذلك الجزء العظيم فيك؟",
+
         choices: [
             {
                 text: "نعم",
                 response: "أتمنى أن تشاركني قصتك.",
                 expression: "normal"
             },
+
             {
                 text: "لا",
                 response: "بالتوفيق برحلتك، هيا بنا!",
-                expression: "normal"
+                expression: "hmm"
             }
         ]
     },
+
+
+    /* =====================================================
+       النباتات
+       ===================================================== */
 
     {
         type: "text",
@@ -224,13 +258,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "التكاثر في النباتات الزهرية؟",
+
         choices: [
             {
                 text: "جنسي",
-                response: "صحيح! خرجت من تعميم المعلمة ريهام: «ومانتم فاهمين شي». وعلى الأقل عرفت الجواب هنا!",
+                response: "صحيح! خرجت من تعميم المعلمة ريهام: والله مانتم فاهمين شي. وعلى الأقل عرفت الجواب هنا!",
                 expression: "normal"
             },
+
             {
                 text: "لا جنسي",
                 response: "بجدية؟",
@@ -238,6 +275,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       المريخ
+       ===================================================== */
 
     {
         type: "text",
@@ -247,13 +289,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما هو لون كوكب المريخ؟",
+
         choices: [
             {
                 text: "أحمر",
                 response: "صحيح! هل استطعت رؤية ذلك بنفسك! نعلم أن الأرض لونها أزرق نوعا ما من فوق بسبب أن الجزء الأكبر بها الماء.",
                 expression: "normal"
             },
+
             {
                 text: "أزرق",
                 response: "صحيح! إن كان مثلجا.",
@@ -269,6 +314,11 @@ const story = [
         expression: "hmm"
     },
 
+
+    /* =====================================================
+       أكبر عظمة
+       ===================================================== */
+
     {
         type: "text",
         speaker: "زهرة",
@@ -277,13 +327,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "ما أكبر عظمة في جسم الإنسان؟",
+
         choices: [
             {
                 text: "عظمة الفخذ",
-                response: "إيماءة— ذكي كما عهدتك—!",
+                response: "—إيماءة— ذكي كما عهدتك!",
                 expression: "normal"
             },
+
             {
                 text: "عظمة العضد",
                 response: "أشر لي على عضدك يا متذاكي.",
@@ -291,6 +344,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       الملح
+       ===================================================== */
 
     {
         type: "text",
@@ -300,20 +358,28 @@ const story = [
 
     {
         type: "choice",
-        question: "الملح مركب أم عنصر؟",
+
+        question: "الملح الذي نستخدمه في الطعام مركب أم عنصر؟",
+
         choices: [
             {
                 text: "مركب",
                 response: "دعني أحزر، لابد أنك من القسم العلمي! هل يمكنك ذكر أول براند ملح ظهر بعقلك؟",
                 expression: "normal"
             },
+
             {
                 text: "عنصر",
-                response: "—اححححح... —أصوات استياء",
+                response: "اححححح... —أصوات استياء—",
                 expression: "disappointed"
             }
         ]
     },
+
+
+    /* =====================================================
+       القمر
+       ===================================================== */
 
     {
         type: "text",
@@ -323,13 +389,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "هل القمر يصدر ضوءه بنفسه؟",
+
         choices: [
             {
                 text: "لا",
                 response: "صحيح! لأنه يعكس ضوء الشمس. حتى القمر قاصر لوحده، أفضل أن أشبه بالشمس على القمر. لكن بالنسبة لي أنت قمر يشع لوحده.",
                 expression: "normal"
             },
+
             {
                 text: "نعم",
                 response: "ما عندي رد لك.",
@@ -337,6 +406,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       DNA
+       ===================================================== */
 
     {
         type: "text",
@@ -346,13 +420,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "أين توجد معظم المادة الوراثية DNA؟",
+
         choices: [
             {
                 text: "النواة",
                 response: "بديهي.",
                 expression: "normal"
             },
+
             {
                 text: "الغشاء الخلوي",
                 response: "فقدت الأمل فيك.",
@@ -360,6 +437,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       حرب البسوس
+       ===================================================== */
 
     {
         type: "text",
@@ -369,13 +451,16 @@ const story = [
 
     {
         type: "choice",
+
         question: "حرب البسوس كانت بسبب؟",
+
         choices: [
             {
                 text: "ناقة",
                 response: "صحيح ودرامي جدا.",
                 expression: "normal"
             },
+
             {
                 text: "اختلافات سياسية",
                 response: "صحيح نوعا ما، لكن أميل للاختيار غير المتوقع.",
@@ -383,6 +468,11 @@ const story = [
             }
         ]
     },
+
+
+    /* =====================================================
+       النهاية
+       ===================================================== */
 
     {
         type: "text",
@@ -405,7 +495,9 @@ const story = [
 ];
 
 
-
+/* =====================================================
+   الكتابة التدريجية
+   ===================================================== */
 
 function typeText(text) {
 
@@ -415,25 +507,29 @@ function typeText(text) {
     dialogue.textContent = "";
 
     let index = 0;
+
     typing = true;
 
     typingTimer = setInterval(() => {
 
         dialogue.textContent += fullText[index];
+
         index++;
 
         if (index >= fullText.length) {
 
             clearInterval(typingTimer);
-            typing = false;
 
+            typing = false;
         }
 
     }, 25);
 }
 
 
-
+/* =====================================================
+   عرض المشهد
+   ===================================================== */
 
 function showScene() {
 
@@ -446,31 +542,50 @@ function showScene() {
 
     nameBox.textContent = scene.speaker || "زهرة";
 
+
+    /* الحوار العادي */
+
     if (scene.type === "text") {
 
         if (scene.expression) {
+
             setCharacter(scene.expression);
+
         } else {
+
             normalExpression();
         }
 
         typeText(scene.text);
+
+        dialogueBox.onclick = advance;
     }
+
+
+    /* الاختيارات */
 
     else if (scene.type === "choice") {
 
         showChoices(scene);
     }
 
+
+    /* النهاية */
+
     else if (scene.type === "end") {
 
         setCharacter("normal");
+
         typeText(scene.text);
+
+        dialogueBox.onclick = advance;
     }
 }
 
 
-
+/* =====================================================
+   عرض الاختيارات
+   ===================================================== */
 
 function showChoices(scene) {
 
@@ -478,14 +593,29 @@ function showChoices(scene) {
 
     choicesBox.innerHTML = "";
 
+    /* عنوان السؤال */
+
+    const question = document.createElement("div");
+
+    question.className = "choice-question";
+
+    question.textContent = scene.question;
+
+    choicesBox.appendChild(question);
+
+
+    /* الأزرار */
+
     scene.choices.forEach((choice) => {
 
         const button = document.createElement("button");
 
         button.className = "choice";
+
         button.textContent = choice.text;
 
         button.onclick = () => {
+
             showResponse(choice);
         };
 
@@ -496,24 +626,40 @@ function showChoices(scene) {
 }
 
 
-
+/* =====================================================
+   رد الاختيار
+   ===================================================== */
 
 function showResponse(choice) {
 
     game.classList.remove("choosing");
+
     choicesBox.style.display = "none";
 
     nameBox.textContent = "زهرة";
 
+
+    /* تغيير تعبير زهرة */
+
     if (choice.expression) {
+
         setCharacter(choice.expression);
+
     } else {
+
         normalExpression();
     }
 
+
     typeText(choice.response);
 
+
+    /* عند الضغط بعد الرد */
+
     dialogueBox.onclick = function () {
+
+        /* إذا النص لم ينته بعد:
+           أكمله فورا */
 
         if (typing) {
 
@@ -526,6 +672,10 @@ function showResponse(choice) {
             return;
         }
 
+
+        /* النص انتهى:
+           نرجع لمسار القصة */
+
         dialogueBox.onclick = advance;
 
         advance();
@@ -533,9 +683,13 @@ function showResponse(choice) {
 }
 
 
-
+/* =====================================================
+   الانتقال للمشهد التالي
+   ===================================================== */
 
 function advance() {
+
+    /* إذا كان النص يكتب، أظهره كاملا */
 
     if (typing) {
 
@@ -548,17 +702,22 @@ function advance() {
         return;
     }
 
+
     current++;
 
+
     if (current >= story.length) {
+
         return;
     }
+
 
     showScene();
 }
 
 
-
-dialogueBox.onclick = advance;
+/* =====================================================
+   تشغيل اللعبة
+   ===================================================== */
 
 showScene();
