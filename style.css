@@ -4,154 +4,273 @@
     padding: 0;
 }
 
+html,
 body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    background: #3C4272;
+
     font-family: Arial, sans-serif;
 }
 
+/* إطار اللعبة */
 #game {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+
+    width: 370px;
+    height: 320px;
+
     overflow: hidden;
+
     background: #3C4272;
+
+    border: 4px solid #071707;
+    box-shadow:
+        0 0 0 2px #4f8f4f,
+        0 0 15px #000;
+
+    image-rendering: pixelated;
 }
 
+/* الخلفية */
 #background {
     position: absolute;
     inset: 0;
+
     background: #3C4272;
+
+    z-index: 0;
 }
 
+/* الشخصية */
 #character {
     position: absolute;
+
+    bottom: 72px;
     left: 50%;
-    bottom: 170px;
+
     transform: translateX(-50%);
-    max-width: 80%;
-    max-height: 70%;
+
+    max-width: 85%;
+    max-height: 220px;
+
     object-fit: contain;
+
+    image-rendering: pixelated;
+
     z-index: 2;
-}
 
-#dialogue-box {
-    position: absolute;
-    left: 5%;
-    right: 5%;
-    bottom: 25px;
-    min-height: 150px;
-    padding: 35px 25px 25px;
-    background: rgba(20, 22, 45, 0.94);
-    border: 3px solid #ffffff;
-    border-radius: 15px;
-    color: white;
-    cursor: pointer;
-    z-index: 5;
-}
-
-#name-box {
-    position: absolute;
-    top: -28px;
-    right: 25px;
-    padding: 8px 25px;
-    background: #3C4272;
-    border: 3px solid white;
-    border-radius: 12px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#dialogue {
-    font-size: 20px;
-    line-height: 1.8;
-    text-align: right;
-    min-height: 70px;
-}
-
-#continue {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    font-size: 22px;
-    animation: bounce 1s infinite;
-}
-
-#choices {
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    bottom: 190px;
-    display: none;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 10;
-}
-
-.choice {
-    padding: 15px 20px;
-    border: 2px solid white;
-    border-radius: 12px;
-    background: #3C4272;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.choice:hover {
-    background: white;
-    color: #3C4272;
-    transform: scale(1.02);
-}
-
-#game.choosing #dialogue-box {
+    user-select: none;
     pointer-events: none;
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
+/* صندوق الحوار */
+#dialogue-box {
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+
+    min-height: 62px;
+
+    padding: 15px 12px 8px;
+
+    background: #092109;
+
+    border: 3px solid #76b776;
+
+    box-shadow:
+        inset 0 0 0 2px #163b16,
+        0 0 0 2px #061006;
+
+    color: #d8ffd8;
+
+    z-index: 5;
+
+    direction: rtl;
+}
+
+/* اسم زهرة */
+#name-box {
+    position: absolute;
+
+    top: -18px;
+    right: 10px;
+
+    padding: 3px 12px;
+
+    background: #174717;
+
+    border: 2px solid #76b776;
+
+    color: #e5ffe5;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    line-height: 20px;
+
+    white-space: nowrap;
+}
+
+/* الكلام */
+#dialogue {
+    min-height: 30px;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    text-align: right;
+
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* سهم الاستمرار */
+#continue {
+    position: absolute;
+
+    left: 8px;
+    bottom: 5px;
+
+    color: #8cff8c;
+
+    font-size: 12px;
+
+    animation: blink 0.9s infinite;
+}
+
+/* وميض السهم */
+@keyframes blink {
+    0%,
+    45% {
+        opacity: 1;
     }
 
-    50% {
-        transform: translateY(5px);
+    46%,
+    100% {
+        opacity: 0.2;
     }
 }
 
-@media (max-width: 600px) {
+/* صندوق الاختيارات */
+#choices {
+    position: absolute;
 
-    #character {
-        bottom: 180px;
-        max-width: 90%;
-        max-height: 60%;
-    }
+    left: 15px;
+    right: 15px;
+    top: 45px;
 
-    #dialogue-box {
-        bottom: 15px;
-        left: 3%;
-        right: 3%;
-        min-height: 145px;
-        padding: 30px 18px 20px;
-    }
+    display: flex;
+    flex-direction: column;
 
-    #dialogue {
-        font-size: 17px;
-    }
+    gap: 8px;
 
-    #name-box {
-        font-size: 17px;
-        right: 15px;
-    }
+    z-index: 10;
 
-    #choices {
-        left: 5%;
-        right: 5%;
-        bottom: 175px;
-    }
+    direction: rtl;
+}
 
-    .choice {
-        font-size: 16px;
-        padding: 12px;
+/* سؤال الاختيار */
+.choice-question {
+    padding: 9px 10px;
+
+    background: #092109;
+
+    border: 2px solid #76b776;
+
+    color: #e5ffe5;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    text-align: center;
+
+    box-shadow:
+        inset 0 0 0 1px #163b16,
+        0 0 0 1px #061006;
+}
+
+/* أزرار الاختيارات */
+.choice {
+    width: 100%;
+
+    padding: 9px 12px;
+
+    background: #123512;
+
+    border: 2px solid #68a968;
+
+    color: #d8ffd8;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    transition:
+        background 0.1s,
+        transform 0.1s;
+}
+
+/* عند تمرير المؤشر */
+.choice:hover {
+    background: #245c24;
+    border-color: #a0e6a0;
+
+    color: #ffffff;
+}
+
+/* عند الضغط */
+.choice:active {
+    background: #071b07;
+
+    transform: translateY(2px);
+}
+
+/* تأثير شاشة قديمة خفيف */
+#game::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.025) 0px,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+/* منع تحديد النص */
+#game,
+#game * {
+    user-select: none;
+}
+
+/* الشاشات الصغيرة */
+@media (max-width: 390px) {
+    #game {
+        transform: scale(
+            calc((100vw - 20px) / 370)
+        );
     }
 }
