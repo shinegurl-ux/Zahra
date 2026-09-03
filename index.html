@@ -1,39 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
     <title>Zahra</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="game">
+    <!-- =================================================
+         اللعبة
+         ================================================= -->
 
-    <div id="background"></div>
+    <main id="game">
 
-    <img
-        id="character"
-        src="images/normal_zahra.png"
-        alt="زهرة"
-    >
+        <!-- الخلفية -->
+        <div id="background"></div>
 
-    <div id="dialogue-box">
 
-        <div id="name-box">زهرة</div>
+        <!-- =================================================
+             شخصية زهرة
+             الصور موجودة في نفس مجلد index.html
+             ================================================= -->
 
-        <div id="dialogue"></div>
+        <img
+            id="character"
+            src="normal_zahra.png"
+            alt="زهرة"
+        >
 
-        <div id="continue">▼</div>
 
-    </div>
+        <!-- =================================================
+             مربع الحوار
+             ================================================= -->
 
-    <div id="choices"></div>
+        <section id="dialogue-box">
 
-</div>
+            <!-- اسم المتحدث -->
+            <div id="name-box">
+                زهرة
+            </div>
 
-<script src="game.js"></script>
+            <!-- الكلام -->
+            <div id="dialogue"></div>
+
+            <!-- سهم الاستمرار -->
+            <div id="continue">
+                ▼
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             الاختيارات
+             ================================================= -->
+
+        <section id="choices"></section>
+
+    </main>
+
+
+    <!-- =================================================
+         كود اللعبة
+         ================================================= -->
+
+    <script src="game.js"></script>
 
 </body>
+
 </html>
